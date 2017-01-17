@@ -23,8 +23,8 @@ This installation method requires Arduino IDE version 1.6.11 or greater.
 ### Manual Installation
 Click on the "Clone or download" button in the upper right corner. Exctract the
 ZIP file, and move the extracted folder to the location
-"**~/Documents/Arduino/hardware**" or to your selected sketckbook folder. Create
-the "hardware" folder if it doesn't exist. Open Arduino IDE, and a new category
+"**~/Documents/Arduino/hardware**" or to your selected *sketchbook* folder.
+Create the "hardware" folder if it doesn't exist. Open Arduino IDE, and a new category
 in the boards menu called "Arduino Robot Boards" will show up.
 
 ## Derived Open Source Software
