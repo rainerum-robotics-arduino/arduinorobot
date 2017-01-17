@@ -1,0 +1,30 @@
+{
+    "packages": [
+        {
+            "name": "arduinorobot",
+            "maintainer": "j54n1n",
+            "websiteURL": "https://github.com/j54n1n/arduinorobot",
+            "email": "",
+            "help": {
+                "online": "https://github.com/j54n1n/arduinorobot/issues"
+            },
+            "platforms": [
+                {
+                    "name": "Arduino Robot Boards",
+                    "architecture": "avr",
+                    "version": "1.0.0",
+                    "category": "Contributed",
+                    "url": "https://github.com/j54n1n/arduinorobot/releases/download/v1.0.0/arduinorobot-v1.0.0.zip",
+                    "archiveFileName": "arduinorobot-v1.0.0.zip",
+                    "checksum": "SHA-256:50813b1b8d5582cf3708d9b0187a1fc149acdfb8679d4506a01b83f3bd013b6c",
+                    "size": "36928",
+                    "boards": [
+                        { "name": "Arduino Robot" }
+                    ],
+                    "toolsDependencies": []
+                }
+            ],
+            "tools": []
+        }
+    ]
+}

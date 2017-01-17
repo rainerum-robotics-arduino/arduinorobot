@@ -5,19 +5,16 @@ This core requires at least Arduino IDE v1.6, where v1.6.11 or newer is
 recommended and required.
 
 ## How to install
-<!---
 ### Boards Manager Installation
 This installation method requires Arduino IDE version 1.6.11 or greater.
 * Open the Arduino IDE.
 * Open the **File > Preferences** menu item.
-* Enter the following URL in **Additional Boards Manager URLs**:
-`https://j54n1n.github.io/arduinorobot/package_j54n1n_arduinorobot_index.json`
+* Enter the following URL in **Additional Boards Manager URLs**: `https://j54n1n.github.io/arduinorobot/package_j54n1n_arduinorobot_index.json`
 * Open the **Tools > Board > Boards Manager...** menu item.
 * Wait for the platform indexes to finish downloading.
 * Scroll down until you see the **Arduino Robot Boards** entry and click on it.
 * Click **Install**.
 * After installation is complete close the **Boards Manager** window.
---->
 ### Manual Installation
 Click on the "Clone or download" button in the upper right corner. Exctract the
 ZIP file, and move the extracted folder to the location
