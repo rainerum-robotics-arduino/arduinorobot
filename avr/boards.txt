@@ -1,0 +1,76 @@
+# Arduino Robot core and platform
+#
+# For more info:
+# - https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
+# - https://github.com/arduino/Arduino/wiki/Arduino-Hardware-Cores-migration-guide-from-1.0-to-1.6
+
+menu.cpu=Processor
+
+##############################################################
+
+arduinorobot.name=Arduino Robot
+
+arduinorobot.upload.tool=avrdude
+arduinorobot.upload.protocol=avr109
+arduinorobot.upload.maximum_size=28672
+arduinorobot.upload.maximum_data_size=2560
+arduinorobot.upload.speed=57600
+arduinorobot.upload.disable_flushing=true
+arduinorobot.upload.use_1200bps_touch=true
+arduinorobot.upload.wait_for_upload_port=true
+
+arduinorobot.bootloader.tool=avrdude
+arduinorobot.bootloader.low_fuses=0xff
+arduinorobot.bootloader.high_fuses=0xd8
+arduinorobot.bootloader.extended_fuses=0xcb
+arduinorobot.bootloader.unlock_bits=0x3F
+arduinorobot.bootloader.lock_bits=0x2F
+
+arduinorobot.build.mcu=atmega32u4
+arduinorobot.build.f_cpu=16000000L
+arduinorobot.build.core=arduino:arduino
+arduinorobot.build.extra_flags={build.usb_flags}
+
+## Arduino Robot Control Board
+## -------------------------------------------------
+arduinorobot.menu.cpu.controlboard=Control Board
+
+arduinorobot.menu.cpu.controlboard.vid.0=0x2341
+arduinorobot.menu.cpu.controlboard.pid.0=0x0038
+arduinorobot.menu.cpu.controlboard.vid.1=0x2341
+arduinorobot.menu.cpu.controlboard.pid.1=0x8038
+arduinorobot.menu.cpu.controlboard.vid.2=0x2A03
+arduinorobot.menu.cpu.controlboard.pid.2=0x0038
+arduinorobot.menu.cpu.controlboard.vid.3=0x2A03
+arduinorobot.menu.cpu.controlboard.pid.3=0x8038
+
+arduinorobot.menu.cpu.controlboard.bootloader.file=caterina-Arduino_Robot/Caterina-Robot-Control.hex
+
+arduinorobot.menu.cpu.controlboard.build.vid=0x2341
+arduinorobot.menu.cpu.controlboard.build.pid=0x8038
+arduinorobot.menu.cpu.controlboard.build.usb_product="Robot Control"
+arduinorobot.menu.cpu.controlboard.build.board=AVR_ROBOT_CONTROL
+arduinorobot.menu.cpu.controlboard.build.variant=arduino:robot_control
+
+## Arduino Robot Motor Board
+## -------------------------------------------------
+arduinorobot.menu.cpu.motorboard=Motor Board
+
+arduinorobot.menu.cpu.motorboard.vid.0=0x2341
+arduinorobot.menu.cpu.motorboard.pid.0=0x0039
+arduinorobot.menu.cpu.motorboard.vid.1=0x2341
+arduinorobot.menu.cpu.motorboard.pid.1=0x8039
+arduinorobot.menu.cpu.motorboard.vid.2=0x2A03
+arduinorobot.menu.cpu.motorboard.pid.2=0x0039
+arduinorobot.menu.cpu.motorboard.vid.3=0x2A03
+arduinorobot.menu.cpu.motorboard.pid.3=0x8039
+
+arduinorobot.menu.cpu.motorboard.bootloader.file=caterina-Arduino_Robot/Caterina-Robot-Motor.hex
+
+arduinorobot.menu.cpu.motorboard.build.vid=0x2341
+arduinorobot.menu.cpu.motorboard.build.pid=0x8039
+arduinorobot.menu.cpu.motorboard.build.usb_product="Robot Motor"
+arduinorobot.menu.cpu.motorboard.build.board=AVR_ROBOT_MOTOR
+arduinorobot.menu.cpu.motorboard.build.variant=arduino:robot_motor
+
+##############################################################
