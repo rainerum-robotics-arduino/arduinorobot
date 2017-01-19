@@ -29,24 +29,23 @@ arduinorobot.bootloader.lock_bits=0x2F
 arduinorobot.build.mcu=atmega32u4
 arduinorobot.build.f_cpu=16000000L
 arduinorobot.build.core=arduino:arduino
+arduinorobot.build.vid=0x2341
 arduinorobot.build.extra_flags={build.usb_flags}
 
 ## Arduino Robot Control Board
 ## -------------------------------------------------
 arduinorobot.menu.cpu.controlboard=Control Board
 
-arduinorobot.menu.cpu.controlboard.vid.0=0x2341
-arduinorobot.menu.cpu.controlboard.pid.0=0x0038
-arduinorobot.menu.cpu.controlboard.vid.1=0x2341
-arduinorobot.menu.cpu.controlboard.pid.1=0x8038
-arduinorobot.menu.cpu.controlboard.vid.2=0x2A03
-arduinorobot.menu.cpu.controlboard.pid.2=0x0038
-arduinorobot.menu.cpu.controlboard.vid.3=0x2A03
-arduinorobot.menu.cpu.controlboard.pid.3=0x8038
-
 arduinorobot.menu.cpu.controlboard.bootloader.file=caterina-Arduino_Robot/Caterina-Robot-Control.hex
 
-arduinorobot.menu.cpu.controlboard.build.vid=0x2341
+arduinorobot.menu.cpu.controlboard.build.vid.0=0x2341
+arduinorobot.menu.cpu.controlboard.build.pid.0=0x0038
+arduinorobot.menu.cpu.controlboard.build.vid.1=0x2341
+arduinorobot.menu.cpu.controlboard.build.pid.1=0x8038
+arduinorobot.menu.cpu.controlboard.build.vid.2=0x2A03
+arduinorobot.menu.cpu.controlboard.build.pid.2=0x0038
+arduinorobot.menu.cpu.controlboard.build.vid.3=0x2A03
+arduinorobot.menu.cpu.controlboard.build.pid.3=0x8038
 arduinorobot.menu.cpu.controlboard.build.pid=0x8038
 arduinorobot.menu.cpu.controlboard.build.usb_product="Robot Control"
 arduinorobot.menu.cpu.controlboard.build.board=AVR_ROBOT_CONTROL
@@ -56,18 +55,16 @@ arduinorobot.menu.cpu.controlboard.build.variant=arduino:robot_control
 ## -------------------------------------------------
 arduinorobot.menu.cpu.motorboard=Motor Board
 
-arduinorobot.menu.cpu.motorboard.vid.0=0x2341
-arduinorobot.menu.cpu.motorboard.pid.0=0x0039
-arduinorobot.menu.cpu.motorboard.vid.1=0x2341
-arduinorobot.menu.cpu.motorboard.pid.1=0x8039
-arduinorobot.menu.cpu.motorboard.vid.2=0x2A03
-arduinorobot.menu.cpu.motorboard.pid.2=0x0039
-arduinorobot.menu.cpu.motorboard.vid.3=0x2A03
-arduinorobot.menu.cpu.motorboard.pid.3=0x8039
-
 arduinorobot.menu.cpu.motorboard.bootloader.file=caterina-Arduino_Robot/Caterina-Robot-Motor.hex
 
-arduinorobot.menu.cpu.motorboard.build.vid=0x2341
+arduinorobot.menu.cpu.motorboard.build.vid.0=0x2341
+arduinorobot.menu.cpu.motorboard.build.pid.0=0x0039
+arduinorobot.menu.cpu.motorboard.build.vid.1=0x2341
+arduinorobot.menu.cpu.motorboard.build.pid.1=0x8039
+arduinorobot.menu.cpu.motorboard.build.vid.2=0x2A03
+arduinorobot.menu.cpu.motorboard.build.pid.2=0x0039
+arduinorobot.menu.cpu.motorboard.build.vid.3=0x2A03
+arduinorobot.menu.cpu.motorboard.build.pid.3=0x8039
 arduinorobot.menu.cpu.motorboard.build.pid=0x8039
 arduinorobot.menu.cpu.motorboard.build.usb_product="Robot Motor"
 arduinorobot.menu.cpu.motorboard.build.board=AVR_ROBOT_MOTOR
