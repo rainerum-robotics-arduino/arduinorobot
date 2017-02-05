@@ -1,0 +1,26 @@
+#######################################
+# Syntax Coloring Map for
+# AnalogMultiplexer
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AnalogMultiplexer	KEYWORD1
+AMxx40xx	KEYWORD1
+AMxx4051	KEYWORD1
+AMxx4052	KEYWORD1
+AMxx4053	KEYWORD1
+AMxx4067	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+enable	KEYWORD2
+disable	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
