@@ -1,12 +1,13 @@
 #######################################
-# Syntax Coloring Map EasyTransfer
+# Syntax Coloring Map
+# ArduinoRobotEasyTransfer 
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-EasyTransfer	KEYWORD1
+ArduinoRobotEasyTransfer	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -19,4 +20,3 @@ begin	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
-details	LITERAL1
