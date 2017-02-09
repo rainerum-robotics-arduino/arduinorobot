@@ -1,34 +1,33 @@
 /*******************************************************************************
-*  ArduinoRobotEasyTransfer library modified by Julian Sanin,
-*  backported from:
+*  IntegerEasyTransfer 1.0.0 library modified by Julian Sanin, sourced from:
 *
 *  EasyTransfer Arduino Library v2.1
-*		details and example sketch: 
-*			http://www.billporter.info/easytransfer-arduino-library/
+*       details and example sketch: 
+*           http://www.billporter.info/easytransfer-arduino-library/
 *
-*		Brought to you by:
+*       Brought to you by:
 *              Bill Porter
 *              www.billporter.info
 *
-*		Major props to Mathieu Alorent (kumy) for 
-*		  I2C version and the pretty pictures.
+*       Major props to Mathieu Alorent (kumy) for 
+*         I2C version and the pretty pictures.
 *
 *
 *  Lib version history
-*	1.0  Created
-*	1.1  Fixed dumb Copy-paste error in header file
-*		 Added a keyword file
-*	1.5  Forked lib into Software and Hardware Serial branches, I don't know a
+*   1.0  Created
+*   1.1  Fixed dumb Copy-paste error in header file
+*        Added a keyword file
+*   1.5  Forked lib into Software and Hardware Serial branches, I don't know a
 *        better way added passing in of Serial port of different types
-*	1.6  Fixed bug where it wasn't clearing out the buffers if the CheckSum
+*   1.6  Fixed bug where it wasn't clearing out the buffers if the CheckSum
 *        failed, I'm good at dumb mistakes
-*	1.7  Fixed a bug where the receive function could block for too long and
+*   1.7  Fixed a bug where the receive function could block for too long and
 *        never process data correctly
-*		 Organized the examples to be Arduino IDE compatible
-*	1.8
-*		 Now Arduino 1.0 compatible!
+*        Organized the examples to be Arduino IDE compatible
+*   1.8
+*        Now Arduino 1.0 compatible!
 *   1.81
-*		 Made it more cross compatible. Man, They really made us work for this
+*        Made it more cross compatible. Man, They really made us work for this
 *        one. 
 *   2.0
 *        Combined SoftEasyTransfer with the other two to make everything one
@@ -38,21 +37,24 @@
 *   2.0.1
 *        VirtualWire version tested by garth@netram, bugs fixed. 
 *   2.1
-*	     Changes RX parsing buffer to dynamic allocation to conserve RAM.
-*   3.0.0
-*        Imported EasyTransfer library as ArduinoRobotEasyTransfer.
-*        Backported ArduinoRobot modifications.
+*        Changes RX parsing buffer to dynamic allocation to conserve RAM.
+*   1.0.0
+*        Imported EasyTransfer library as IntegerEasyTransfer.
+*        Backported ArduinoRobot modifications and restarted version numbering.
+*        The library supports a maximum of 20 uint8_t or 10 int16_t values.
+*        Mixed uint8_t and int16_t are allowed but care should be taken that the
+*        values do not overflow the data buffer.
 *
 *
 *  Limits of the Library
-*		You can change the Serial port,
-*		but the Struct size must not pass 255 bytes
-*		VirtualWire Version Struct can'e be bigger then 26 bytes
+*       You can change the Serial port,
+*       but the Struct size must not pass 255 bytes
+*       VirtualWire Version Struct can'e be bigger then 26 bytes
 *
 *   The protcol is as follows:
-*		Header(0x06,0x85),SizeofPayload,Payload,Checksum
-*	
-*  
+*       Header(0x06,0x85),SizeofPayload,Payload,Checksum
+*
+*
 * This program is free software: you can redistribute it and/or modify it under
 * the terms of the GNU General Public License as published by the Free Software
 * Foundation, either version 3 of the License, or(at your option) any later

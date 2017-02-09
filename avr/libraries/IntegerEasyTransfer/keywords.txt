@@ -1,21 +1,25 @@
 #######################################
 # Syntax Coloring Map
-# ArduinoRobotEasyTransfer 
+# IntegerEasyTransfer
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-ArduinoRobotEasyTransfer	KEYWORD1
+IntegerEasyTransfer	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
+
+begin	KEYWORD2
 sendData	KEYWORD2
 receiveData	KEYWORD2
-begin	KEYWORD2
-
+writeByte	KEYWORD2
+writeInt	KEYWORD2
+readByte	KEYWORD2
+readInt	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
