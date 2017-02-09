@@ -49,7 +49,7 @@ arduinorobot.menu.cpu.controlboard.build.pid.3=0x8038
 arduinorobot.menu.cpu.controlboard.build.pid=0x8038
 arduinorobot.menu.cpu.controlboard.build.usb_product="Robot Control"
 arduinorobot.menu.cpu.controlboard.build.board=AVR_ROBOT_CONTROL
-arduinorobot.menu.cpu.controlboard.build.variant=arduino:robot_control
+arduinorobot.menu.cpu.controlboard.build.variant=robot_control
 
 ## Arduino Robot Motor Board
 ## -------------------------------------------------
@@ -68,6 +68,6 @@ arduinorobot.menu.cpu.motorboard.build.pid.3=0x8039
 arduinorobot.menu.cpu.motorboard.build.pid=0x8039
 arduinorobot.menu.cpu.motorboard.build.usb_product="Robot Motor"
 arduinorobot.menu.cpu.motorboard.build.board=AVR_ROBOT_MOTOR
-arduinorobot.menu.cpu.motorboard.build.variant=arduino:robot_motor
+arduinorobot.menu.cpu.motorboard.build.variant=robot_motor
 
 ##############################################################
