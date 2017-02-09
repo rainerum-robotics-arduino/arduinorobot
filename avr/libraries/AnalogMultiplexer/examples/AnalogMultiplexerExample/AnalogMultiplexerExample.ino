@@ -42,7 +42,7 @@ void setup() {
 		Serial.println(value);
 	}
 	Serial.println();
-	mux.disable(); // Switch of multiplexer.
+	mux.disable(); // Switch off multiplexer.
 }
 
 void loop() { }
