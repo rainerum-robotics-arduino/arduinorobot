@@ -29,6 +29,8 @@ arduinorobot.bootloader.lock_bits=0x2F
 arduinorobot.build.mcu=atmega32u4
 arduinorobot.build.f_cpu=16000000L
 arduinorobot.build.core=arduino:arduino
+# Default board will be overridden by the cpu menu
+arduinorobot.build.board=AVR_ROBOT_CONTROL
 arduinorobot.build.vid=0x2341
 arduinorobot.build.extra_flags={build.usb_flags}
 
