@@ -8,6 +8,12 @@
 #######################################
 
 IntegerEasyTransfer	KEYWORD1
+IntegerEasyTransferFeature	KEYWORD1
+IntegerEasyTransferFeatureManager	KEYWORD1
+TwoWayIntegerEasyTransfer	KEYWORD1
+DefaultMessageCallbackFunction	KEYWORD1
+FeatureMessageCallbackFunction	KEYWORD1
+SystemResetCallbackFunction	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -20,7 +26,17 @@ writeByte	KEYWORD2
 writeInt	KEYWORD2
 readByte	KEYWORD2
 readInt	KEYWORD2
+sendSystemReset	KEYWORD2
+hasReceivedData	KEYWORD2
+processInput	KEYWORD2
+attach	KEYWORD2
+addFeature	KEYWORD2
+handleMessage	KEYWORD2
+reset	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+MESSAGE_FEATURE LITERAL1
+MESSAGE_SYSTEM_RESET	LITERAL1

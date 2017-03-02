@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  IntegerEasyTransfer 1.0.0 library modified by Julian Sanin, sourced from:
+*  IntegerEasyTransfer 1.1.0 library modified by Julian Sanin, sourced from:
 *
 *  EasyTransfer Arduino Library v2.1
 *       details and example sketch: 
@@ -44,6 +44,9 @@
 *        The library supports a maximum of 20 uint8_t or 10 int16_t values.
 *        Mixed uint8_t and int16_t are allowed but care should be taken that the
 *        values do not overflow the data buffer.
+*   1.1.0
+*        Added new classes to support two way communications and extended
+*        messages and software reset.
 *
 *
 *  Limits of the Library
