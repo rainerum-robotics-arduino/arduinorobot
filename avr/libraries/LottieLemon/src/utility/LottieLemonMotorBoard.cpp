@@ -307,3 +307,24 @@ void MotorBoard::reset() {
 	begin();
 	stopCurrentActions();
 }
+
+float MotorBoard::getBatteryTerminalVolts() {
+	// Read battery voltage on multiplexer channel 5.
+	int adcValue = _multiplexer.analogRead(5);
+	float adcVoltage = (5.0f / 1023.0f) * adcValue;
+	return 2.0f * adcVoltage; // Compensate for voltage divider.
+}
+
+float MotorBoard::getBatteryChargeMilliamps() {
+	// Read battery charge current on multiplexer channel 6.
+	int adcValue = _multiplexer.analogRead(6);
+	float adcVoltage = (5.0f / 1023.0f) * adcValue;
+	return adcVoltage / 0.00075f; // Compensate sense resistor and gain.
+}
+
+float MotorBoard::getBatteryDischargeMilliamps() {
+	// Read battery discharge current on multiplexer channel 7.
+	int adcValue = _multiplexer.analogRead(7);
+	float adcVoltage = (5.0f / 1023.0f) * adcValue;
+	return adcVoltage / 0.00075f; // Compensate sense resistor and gain.
+}

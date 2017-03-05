@@ -35,6 +35,10 @@ namespace LottieLemon {
 
 		int IRread(uint8_t num);
 
+		float getBatteryTerminalVolts();
+		float getBatteryChargeMilliamps();
+		float getBatteryDischargeMilliamps();
+
 		void setMode(uint8_t mode);
 		void pauseMode(bool onOff);
 
