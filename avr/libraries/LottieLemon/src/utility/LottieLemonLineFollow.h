@@ -16,43 +16,42 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
-#ifndef LINE_FOLLOW_H
-#define LINE_FOLLOW_H
+#ifndef LOTTIE_LEMON_LINE_FOLLOW_H
+#define LOTTIE_LEMON_LINE_FOLLOW_H
 
-#if ARDUINO >= 100
-	#include "Arduino.h"
-#else
-	#include "WProgram.h"
-#endif
+#include <stdint.h>
 
-class LineFollow{
+namespace LottieLemon {
+
+	class LineFollow {
 	public:
 		LineFollow();
 
 		void calibIRs();
 		void runLineFollow();
 		void config(uint8_t KP, uint8_t KD, uint8_t robotSpeed, uint8_t intergrationTime);
-		
+
 		//These are all pure virtual functions, pure VF needs pure specifier "=0"
 		//virtual void motorsWrite(int speedL, int speedR)=0;
-		virtual void motorsWritePct(int speedLpct, int speedRpct)=0;
-		virtual void motorsStop()=0;
-		virtual int _IRread(uint8_t num)=0;
+		virtual void motorsWritePct(int speedLpct, int speedRpct) = 0;
+		virtual void motorsStop() = 0;
+		virtual int _IRread(uint8_t num) = 0;
 	protected:
-		virtual	void reportActionDone()=0;
-		
+		virtual	void reportActionDone() = 0;
+
 	private:
-		void doCalibration(int speedPct, int time);
+		void doCalibration(int speedPct, unsigned int time);
 		void ajusta_niveles();
-		
+
 		uint8_t KP;
 		uint8_t KD;
 		uint8_t robotSpeed; //percentage
 		uint8_t intergrationTime;
-		
+
 		int lectura_sensor[5], last_error, acu;
 		int sensor_blanco[5];
 		int sensor_negro[5];
-};
+	};
+}
 
-#endif
+#endif // LOTTIE_LEMON_LINE_FOLLOW_H

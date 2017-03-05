@@ -1,0 +1,30 @@
+#######################################
+# Syntax Coloring Map for
+# LottieLemon
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+LottieLemon	KEYWORD1
+MotorBoard	KEYWORD1
+LineFollow	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+run	KEYWORD2
+motorsWrite	KEYWORD2
+IRread	KEYWORD2
+calibIRs	KEYWORD2
+runLineFollow	KEYWORD2
+config	KEYWORD2
+motorsWritePct	KEYWORD2
+motorsStop	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################

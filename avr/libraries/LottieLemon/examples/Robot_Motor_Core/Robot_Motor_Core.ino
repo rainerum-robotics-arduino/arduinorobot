@@ -7,12 +7,25 @@
 
 */
 
-#include <ArduinoRobotMotorBoard.h>
+#include <TwoWayIntegerEasyTransfer.h>
+#include <LottieLemon.h>
+
+LottieLemon::MotorBoard motorBoard;
 
 void setup() {
-  RobotMotor.begin();
+	Serial1.begin(9600);
+	TwoWayIntegerEasyTransfer.begin(&Serial1);
+	TwoWayIntegerEasyTransfer.attach([]() { doSystemReset(); });
+	doSystemReset();
 }
+
 void loop() {
-  RobotMotor.parseCommand();
-  RobotMotor.process();
+	if (TwoWayIntegerEasyTransfer.hasReceivedData()) {
+		TwoWayIntegerEasyTransfer.processInput();
+	}
+	motorBoard.run();
+}
+
+void doSystemReset() {
+	motorBoard.reset();
 }

@@ -1,12 +1,15 @@
-= Robot Motor Library for Arduino =
+# Arduino Robot Library (codename 'Lottie Lemon')
 
-The Robot has a number of built in sensors and actuators. The library is designed to easily access the robot's functionality.
+The Robot has a number of built in sensors and actuators. The library is
+designed to easily access the robot's functionality.
 
-For more information about this library please visit us at
-http://www.arduino.cc/en/Reference/RobotLibrary
+For more information about this library please visit:
+* https://www.arduino.cc/en/Main/Robot
+* https://www.arduino.cc/en/Reference/RobotLibrary
+* https://github.com/j54n1n/arduinorobot
 
-== License ==
-
+## License
+```
 Copyright (c) Arduino LLC. All right reserved.
 
 This library is free software; you can redistribute it and/or
@@ -22,3 +25,4 @@ Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+```
