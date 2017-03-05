@@ -14,10 +14,10 @@
                     "architecture": "avr",
                     "version": "1.0.2",
                     "category": "Contributed",
-                    "url": "https://github.com/j54n1n/arduinorobot/releases/download/v1.0.2/arduinorobot-v1.0.2.zip",
-                    "archiveFileName": "arduinorobot-v1.0.2.zip",
-                    "checksum": "SHA-256:005bfd9981c422a78a2e982806df7cbf7f3fc1339ebf8681727e03739d6a0275",
-                    "size": "153278",
+                    "url": "https://github.com/j54n1n/arduinorobot/releases/download/v1.0.3/arduinorobot-v1.0.3.zip",
+                    "archiveFileName": "arduinorobot-v1.0.3.zip",
+                    "checksum": "SHA-256:6edaa3c7c5663dca4bb7ad027e178d38897b40e2a8a8f39f08a72414a36406f2",
+                    "size": "176660",
                     "boards": [
                         { "name": "Arduino Robot" }
                     ],
