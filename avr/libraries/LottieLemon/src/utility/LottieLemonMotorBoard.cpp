@@ -20,6 +20,8 @@
 #include <TwoWayIntegerEasyTransfer.h>
 #include "../LottieLemon.h"
 
+#ifdef ARDUINO_AVR_ROBOT_MOTOR
+
 using namespace LottieLemon;
 
 static MotorBoard * _motorBoard = nullptr;
@@ -328,3 +330,5 @@ float MotorBoard::getBatteryDischargeMilliamps() {
 	float adcVoltage = (5.0f / 1023.0f) * adcValue;
 	return adcVoltage / 0.00075f; // Compensate sense resistor and gain.
 }
+
+#endif // ARDUINO_AVR_ROBOT_MOTOR

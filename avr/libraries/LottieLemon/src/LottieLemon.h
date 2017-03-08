@@ -19,7 +19,12 @@
 #ifndef LOTTIE_LEMON_H
 #define LOTTIE_LEMON_H
 
+#ifdef ARDUINO_AVR_ROBOT_MOTOR
 #include "utility/LottieLemonMotorBoard.h"
+#endif
+#ifdef ARDUINO_AVR_ROBOT_CONTROL
+#include "utility/LottieLemonControlBoard.h"
+#endif
 
 namespace LottieLemon {
 
