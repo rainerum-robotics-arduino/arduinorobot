@@ -29,15 +29,21 @@
 AnalogMultiplexer::AnalogMultiplexer(uint8_t pinEnable) {
 	_pinEnable = pinEnable;
 	_pinCommon = NOT_A_PIN;
-	/*Arduino*/::pinMode(_pinEnable, OUTPUT);
+	if (NOT_A_PIN != _pinEnable) {
+		/*Arduino*/::pinMode(_pinEnable, OUTPUT);
+	}
 }
 
 void AnalogMultiplexer::enable() {
-	/*Arduino*/::digitalWrite(_pinEnable, LOW);
+	if (NOT_A_PIN != _pinEnable) {
+		/*Arduino*/::digitalWrite(_pinEnable, LOW);
+	}
 }
 
 void AnalogMultiplexer::disable() {
-	/*Arduino*/::digitalWrite(_pinEnable, HIGH);
+	if (NOT_A_PIN != _pinEnable) {
+		/*Arduino*/::digitalWrite(_pinEnable, HIGH);
+	}
 }
 
 void AnalogMultiplexer::pinMode(uint8_t pinCommon, uint8_t mode) {

@@ -2,7 +2,7 @@
 
 // Selected Arduino pins.
 enum {
-	PIN_EN = 2, // The enable pin of the multiplexer.
+	PIN_EN = 2, // The enable pin of the multiplexer or NOT_A_PIN.
 	PIN_S0 = 3, // Channel selector pin 0.
 	PIN_S1 = 4, // Channel selector pin 1.
 	PIN_S2 = 5, // Channel selector pin 2.
