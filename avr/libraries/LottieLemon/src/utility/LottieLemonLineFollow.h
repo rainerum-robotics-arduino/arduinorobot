@@ -27,30 +27,36 @@ namespace LottieLemon {
 	public:
 		LineFollow();
 
-		void calibIRs();
 		void runLineFollow();
-		void config(uint8_t KP, uint8_t KD, uint8_t robotSpeed, uint8_t intergrationTime);
-
+		void config(uint8_t KP, uint8_t KD,
+			uint8_t robotSpeedPct, uint8_t integrationTimeMillis
+		);
+		void config(uint8_t KP, uint8_t KI, uint8_t KD,
+			uint8_t robotSpeedPct, uint8_t integrationTimeMillis
+		);
 		//These are all pure virtual functions, pure VF needs pure specifier "=0"
 		//virtual void motorsWrite(int speedL, int speedR)=0;
 		virtual void motorsWritePct(int speedLpct, int speedRpct) = 0;
 		virtual void motorsStop() = 0;
-		virtual int _IRread(uint8_t num) = 0;
 	protected:
+		virtual int _IRread(uint8_t num) = 0;
 		virtual	void reportActionDone() = 0;
+		void calibIRs();
 
 	private:
 		void doCalibration(int speedPct, unsigned int time);
-		void ajusta_niveles();
 
-		uint8_t KP;
-		uint8_t KD;
-		uint8_t robotSpeed; //percentage
-		uint8_t intergrationTime;
+		uint8_t _KP;
+		uint8_t _KI;
+		uint8_t _KD;
+		uint8_t _robotSpeedPct;
+		uint8_t _integrationTimeMillis;
+		unsigned long _tStartMillis;
 
-		int lectura_sensor[5], last_error, acu;
-		int sensor_blanco[5];
-		int sensor_negro[5];
+		uint16_t _sensors[5];
+		int16_t _integral = 0;
+		int16_t _derivative = 0;
+		int16_t _lastError = 0;
 	};
 }
 
