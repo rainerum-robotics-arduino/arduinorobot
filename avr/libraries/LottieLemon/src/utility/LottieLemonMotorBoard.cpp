@@ -82,6 +82,10 @@ bool MotorBoard::handleMessage(uint8_t command, IntegerEasyTransfer & request) {
 	int value;
 	int speedL;
 	int speedR;
+	uint8_t kP;
+	uint8_t kD;
+	uint8_t robotSpeedPct;
+	uint8_t integrationTimeMillis;
 	//Serial.println("data received");
 	//Serial.println(command);
 	switch (command) {
@@ -127,12 +131,11 @@ bool MotorBoard::handleMessage(uint8_t command, IntegerEasyTransfer & request) {
 		pauseMode(request.readByte());//onOff state
 		break;
 	case COMMAND_LINE_FOLLOW_CONFIG:
-		LineFollow::config(
-			request.readByte(),	//KP
-			request.readByte(),	//KD
-			request.readByte(),	//robotSpeed
-			request.readByte()	//IntegrationTime
-		);
+		kP = request.readByte();
+		kD = request.readByte();
+		robotSpeedPct = request.readByte();
+		integrationTimeMillis = request.readByte();
+		LineFollow::config(kP, kD, robotSpeedPct, integrationTimeMillis);
 		break;
 	default:
 		return false;
