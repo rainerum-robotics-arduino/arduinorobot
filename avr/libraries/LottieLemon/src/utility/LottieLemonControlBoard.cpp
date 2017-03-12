@@ -24,12 +24,34 @@
 
 using namespace LottieLemon;
 
-static void _requestData(uint8_t command) {
-	TwoWayIntegerEasyTransfer.writeByte(command);
-	TwoWayIntegerEasyTransfer.sendData();
+static void processRequest() {
 	if (TwoWayIntegerEasyTransfer.hasReceivedData()) {
 		TwoWayIntegerEasyTransfer.processInput();
 	}
+}
+
+template<typename Tail>
+static void sendData(const Tail & tail) {
+	TwoWayIntegerEasyTransfer.writeByte(tail);
+	TwoWayIntegerEasyTransfer.sendData();
+}
+
+template<typename Tail>
+static void requestData(const Tail & tail) {
+	sendData(tail);
+	processRequest();
+}
+
+template<typename Head, typename... Body>
+static void sendData(const Head & head, const Body & ... body) {
+	TwoWayIntegerEasyTransfer.writeByte(head);
+	sendData(body...);
+}
+
+template<typename Head, typename... Body>
+static void requestData(const Head & head, const Body & ... body) {
+	TwoWayIntegerEasyTransfer.writeByte(head);
+	requestData(body...);
 }
 
 ControlBoard::ControlBoard()
@@ -37,98 +59,113 @@ ControlBoard::ControlBoard()
 }
 
 void ControlBoard::setMode(uint8_t mode) {
-	TwoWayIntegerEasyTransfer.writeByte(COMMAND_SWITCH_MODE);
-	TwoWayIntegerEasyTransfer.writeByte(mode);
-	TwoWayIntegerEasyTransfer.sendData();
+	sendData(COMMAND_SWITCH_MODE, mode);
 }
 
 void ControlBoard::pauseMode(bool isPaused) {
-	TwoWayIntegerEasyTransfer.writeByte(COMMAND_PAUSE_MODE);
-	TwoWayIntegerEasyTransfer.writeByte(isPaused);
-	TwoWayIntegerEasyTransfer.sendData();
+	sendData(COMMAND_PAUSE_MODE, isPaused);
 }
 
 bool ControlBoard::isActionDone(void) {
 	static bool actionValue;
 	TwoWayIntegerEasyTransfer.attach(
 		[](uint8_t command, IntegerEasyTransfer &) {
-		if (command == COMMAND_ACTION_DONE) {
+		if (command == COMMAND_ACTION_DONE)
 			actionValue = true;
-		}
-		else {
+		else
 			actionValue = false;
-		}
 	});
-	if (TwoWayIntegerEasyTransfer.hasReceivedData()) {
-		TwoWayIntegerEasyTransfer.processInput();
-	}
+	processRequest();
 	return actionValue;
 }
 
 void ControlBoard::lineFollowConfig(
 	uint8_t kP, uint8_t kD,
 	uint8_t robotSpeedPercentage, uint8_t intergrationTimeMillis) {
-	TwoWayIntegerEasyTransfer.writeByte(COMMAND_LINE_FOLLOW_CONFIG);
-	TwoWayIntegerEasyTransfer.writeByte(kP);
-	TwoWayIntegerEasyTransfer.writeByte(kD);
-	TwoWayIntegerEasyTransfer.writeByte(robotSpeedPercentage);
-	TwoWayIntegerEasyTransfer.writeByte(intergrationTimeMillis);
-	TwoWayIntegerEasyTransfer.sendData();
+	sendData(COMMAND_LINE_FOLLOW_CONFIG,
+		kP, kD, robotSpeedPercentage, intergrationTimeMillis);
 }
 
 void ControlBoard::motorsWrite(int speedLeft, int speedRight) {
-	TwoWayIntegerEasyTransfer.writeByte(COMMAND_RUN);
-	TwoWayIntegerEasyTransfer.writeInt(speedLeft);
-	TwoWayIntegerEasyTransfer.writeInt(speedRight);
-	TwoWayIntegerEasyTransfer.sendData();
+	sendData(COMMAND_RUN, speedLeft, speedRight);
 }
 
 void ControlBoard::motorsStop(void) {
-	TwoWayIntegerEasyTransfer.writeByte(COMMAND_MOTORS_STOP);
-	TwoWayIntegerEasyTransfer.sendData();
+	sendData(COMMAND_MOTORS_STOP);
 }
 
-bool ControlBoard::digitalRead(uint8_t port) {
-	return false;
+bool ControlBoard::digitalRead(TopMicrocontrollerPin pin) {
+	// TODO: set pinMode
+	return /*Arduino*/::digitalRead(pin);
 }
 
-void ControlBoard::digitalWrite(uint8_t port, bool value) {
-	/*
-	//bottom TKs, just for communication purpose
-	enum {
-	B_TK1 = 201,
-	B_TK2 = 202,
-	B_TK3 = 203,
-	B_TK4 = 204
-	};
-	#define D10 B_TK1
-	#define D9 B_TK2
-	#define D8 B_TK4
-	#define D7 B_TK3
-	*/
-	/*
-	Type Code  Label
-	D12 [TKD5] (D5) MUXC Not safe to use!
-	D6  [TKD4] (D4) MUXA Not safe to use!
-	A4  [TKD3] (D3)
-	A3  [TKD2] (D2)
-	A2  [TKD1] (D1)
-	A1  [TKD0] (D0)
-	D17 [LED1] (LED)
-	Type Code  Label
-	A11 [B_TK4] (D8)
-	A6  [B_TK3] (D7)
-	A1  [B_TK2] (D9)
-	A0  [B_TK1] (D10)
-	X0..X7 @ mux
-	*/
+bool ControlBoard::digitalRead(TopMultiplexerPin pin) {
+	int channel = pin - T_TK0;
+	// TODO: set pinMode
+	_multiplexer.pinMode(MUX_IN, INPUT);
+	return _multiplexer.digitalRead(channel);
 }
 
-int ControlBoard::analogRead(uint8_t port) {
-	return 0;
+bool ControlBoard::digitalRead(BottomMicrocontrollerPin pin) {
+	// TODO: is pinMode set?
+	static uint8_t pinCode;
+	static uint8_t pinValue;
+	pinCode = pin;
+	TwoWayIntegerEasyTransfer.attach(
+		[](uint8_t command, IntegerEasyTransfer & request) {
+		if ((command == COMMAND_DIGITAL_READ_RE) &&
+			(request.readByte() == pinCode))
+			pinValue = request.readByte();
+		else
+			pinValue = 0;
+	});
+	requestData(COMMAND_DIGITAL_READ, pinCode);
+	return (pinValue != 0);
 }
 
-void ControlBoard::analogWrite(uint8_t port, uint8_t value) {
+void ControlBoard::digitalWrite(TopMicrocontrollerPin pin, bool value) {
+	// TODO: set pinMode
+	/*Arduino*/::digitalWrite(pin, value);
+}
+
+void ControlBoard::digitalWrite(BottomMicrocontrollerPin pin, bool value) {
+	// TODO: is pinMode set?
+	sendData(COMMAND_DIGITAL_WRITE, pin, value);
+}
+
+int ControlBoard::analogRead(TopMicrocontrollerPin pin) {
+	// TODO: set pinMode
+	return /*Arduino*/::analogRead(pin);
+}
+
+int ControlBoard::analogRead(TopMultiplexerPin pin) {
+	int channel = pin - T_TK0;
+	// TODO: set pinMode
+	_multiplexer.pinMode(MUX_IN, INPUT);
+	return _multiplexer.analogRead(channel);
+}
+
+int ControlBoard::analogRead(BottomMicrocontrollerPin pin) {
+	// TODO: is pinMode set?
+	static uint8_t pinCode = pin;
+	static int pinValue;
+	pinCode = pin;
+	TwoWayIntegerEasyTransfer.attach(
+		[](uint8_t command, IntegerEasyTransfer & request) {
+		if ((command == COMMAND_ANALOG_READ_RE) &&
+			(request.readByte() == pinCode))
+			pinValue = request.readInt();
+		else
+			pinValue = 0;
+	});
+	requestData(COMMAND_ANALOG_READ, pinCode);
+	return pinValue;
+}
+
+void ControlBoard::analogWrite(TopMicrocontrollerPin pin, uint8_t value) {
+	// TODO: set pinMode
+	if (pin == T_TKD4)
+		/*Arduino*/::analogWrite(pin, value);
 }
 
 uint8_t ControlBoard::updateIR(uint16_t * ir, uint8_t size) {
@@ -139,15 +176,13 @@ uint8_t ControlBoard::updateIR(uint16_t * ir, uint8_t size) {
 	TwoWayIntegerEasyTransfer.attach(
 		[](uint8_t command, IntegerEasyTransfer & request) {
 		for (uint16_t i = 0; i < MAX_IR_DATA; i++) {
-			if (command == COMMAND_READ_IR_RE) {
+			if (command == COMMAND_READ_IR_RE)
 				irValues[i] = request.readInt();
-			}
-			else {
+			else
 				irValues[i] = 0;
-			}
 		}
 	});
-	_requestData(COMMAND_READ_IR);
+	requestData(COMMAND_READ_IR);
 	memcpy(ir, irValues, maxItems * sizeof(uint16_t));
 	return maxItems;
 }
@@ -156,14 +191,12 @@ int LottieLemon::ControlBoard::trimRead() {
 	static int trimmerValue;
 	TwoWayIntegerEasyTransfer.attach(
 		[](uint8_t command, IntegerEasyTransfer & request) {
-		if (command == COMMAND_READ_TRIM_RE) {
+		if (command == COMMAND_READ_TRIM_RE)
 			trimmerValue = request.readInt();
-		}
-		else {
+		else
 			trimmerValue = 0;
-		}
 	});
-	_requestData(COMMAND_READ_TRIM);
+	requestData(COMMAND_READ_TRIM);
 	return trimmerValue;
 }
 

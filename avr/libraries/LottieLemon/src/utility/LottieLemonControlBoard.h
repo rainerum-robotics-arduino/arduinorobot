@@ -41,10 +41,15 @@ namespace LottieLemon {
 		void motorsWrite(int speedLeft, int speedRight);
 		void motorsStop(void);
 
-		bool digitalRead(uint8_t port /*TK0..TK7, TKD0..TKD5, B_TK1..B_TK4*/);
-		void digitalWrite(uint8_t port /*TKD0..TKD5, B_TK1..B_TK4*/, bool value);
-		int analogRead(uint8_t port /*TK0..TK7, TKD0..TKD5, B_TK1..B_TK4*/);
-		void analogWrite(uint8_t port /*TKD4*/, uint8_t value);
+		bool digitalRead(TopMicrocontrollerPin pin);
+		bool digitalRead(TopMultiplexerPin pin);
+		bool digitalRead(BottomMicrocontrollerPin pin);
+		void digitalWrite(TopMicrocontrollerPin pin, bool value);
+		void digitalWrite(BottomMicrocontrollerPin pin, bool value);
+		int analogRead(TopMicrocontrollerPin pin);
+		int analogRead(TopMultiplexerPin pin);
+		int analogRead(BottomMicrocontrollerPin pin);
+		void analogWrite(TopMicrocontrollerPin pin, uint8_t value);
 
 		uint8_t updateIR(uint16_t * /*[out]*/ ir, uint8_t size);
 		int trimRead(void);
