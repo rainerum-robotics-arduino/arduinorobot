@@ -66,7 +66,8 @@ namespace LottieLemon {
 		COMMAND_READ_TRIM          = 80,
 		COMMAND_READ_TRIM_RE       = 81,
 		COMMAND_PAUSE_MODE         = 90,
-		COMMAND_LINE_FOLLOW_CONFIG = 100
+		COMMAND_LINE_FOLLOW_CONFIG = 100,
+		COMMAND_PIN_MODE           = 110
 	};
 
 	//motor board modes
@@ -77,8 +78,8 @@ namespace LottieLemon {
 		MODE_IR_CONTROL   = 3
 	};
 
-	//bottom TKs, just for communication purpose, DR, DW, AR
-	enum BottomMicrocontrollerPin { // keep and extend to silkscreen names
+	//bottom TKs, just for communication purpose
+	enum BottomMicrocontrollerPin {
 		B_TK1 = 201,
 		B_TK2 = 202,
 		B_TK3 = 203,
