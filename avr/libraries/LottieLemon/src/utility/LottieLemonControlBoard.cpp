@@ -32,7 +32,7 @@ static void processRequest() {
 
 template<typename Tail>
 static void sendData(const Tail & tail) {
-	TwoWayIntegerEasyTransfer.writeByte(tail);
+	TwoWayIntegerEasyTransfer.write(tail);
 	TwoWayIntegerEasyTransfer.sendData();
 }
 
@@ -44,26 +44,30 @@ static void requestData(const Tail & tail) {
 
 template<typename Head, typename... Body>
 static void sendData(const Head & head, const Body & ... body) {
-	TwoWayIntegerEasyTransfer.writeByte(head);
+	TwoWayIntegerEasyTransfer.write(head);
 	sendData(body...);
 }
 
 template<typename Head, typename... Body>
 static void requestData(const Head & head, const Body & ... body) {
-	TwoWayIntegerEasyTransfer.writeByte(head);
+	TwoWayIntegerEasyTransfer.write(head);
 	requestData(body...);
 }
 
 ControlBoard::ControlBoard()
 	: _multiplexer{ NOT_A_PIN, MUXA, MUXB, MUXC, MUXD } {
+	_multiplexer.pinMode(MUX_IN, INPUT);
 }
 
 void ControlBoard::setMode(uint8_t mode) {
-	sendData(COMMAND_SWITCH_MODE, mode);
+	sendData(static_cast<uint8_t>(COMMAND_SWITCH_MODE), mode);
 }
 
 void ControlBoard::pauseMode(bool isPaused) {
-	sendData(COMMAND_PAUSE_MODE, isPaused);
+	sendData(
+		static_cast<uint8_t>(COMMAND_PAUSE_MODE),
+		static_cast<uint8_t>(isPaused)
+	);
 }
 
 bool ControlBoard::isActionDone(void) {
@@ -82,35 +86,42 @@ bool ControlBoard::isActionDone(void) {
 void ControlBoard::lineFollowConfig(
 	uint8_t kP, uint8_t kD,
 	uint8_t robotSpeedPercentage, uint8_t intergrationTimeMillis) {
-	sendData(COMMAND_LINE_FOLLOW_CONFIG,
+	sendData(static_cast<uint8_t>(COMMAND_LINE_FOLLOW_CONFIG),
 		kP, kD, robotSpeedPercentage, intergrationTimeMillis);
 }
 
 void ControlBoard::motorsWrite(int speedLeft, int speedRight) {
-	sendData(COMMAND_RUN, speedLeft, speedRight);
+	sendData(static_cast<uint8_t>(COMMAND_RUN), speedLeft, speedRight);
 }
 
 void ControlBoard::motorsStop(void) {
-	sendData(COMMAND_MOTORS_STOP);
+	sendData(static_cast<uint8_t>(COMMAND_MOTORS_STOP));
+}
+
+void ControlBoard::pinMode(TopMicrocontrollerPin pin, uint8_t value) {
+	/*Arduino*/::pinMode(pin, value);
+}
+
+void ControlBoard::pinMode(BottomMicrocontrollerPin pin, uint8_t value) {
+	sendData(
+		static_cast<uint8_t>(COMMAND_PIN_MODE),
+		static_cast<uint8_t>(pin), value
+	);
 }
 
 bool ControlBoard::digitalRead(TopMicrocontrollerPin pin) {
-	// TODO: set pinMode
 	return /*Arduino*/::digitalRead(pin);
 }
 
 bool ControlBoard::digitalRead(TopMultiplexerPin pin) {
 	int channel = pin - T_TK0;
-	// TODO: set pinMode
-	_multiplexer.pinMode(MUX_IN, INPUT);
 	return _multiplexer.digitalRead(channel);
 }
 
 bool ControlBoard::digitalRead(BottomMicrocontrollerPin pin) {
-	// TODO: is pinMode set?
 	static uint8_t pinCode;
 	static uint8_t pinValue;
-	pinCode = pin;
+	pinCode = static_cast<uint8_t>(pin);
 	TwoWayIntegerEasyTransfer.attach(
 		[](uint8_t command, IntegerEasyTransfer & request) {
 		if ((command == COMMAND_DIGITAL_READ_RE) &&
@@ -119,37 +130,34 @@ bool ControlBoard::digitalRead(BottomMicrocontrollerPin pin) {
 		else
 			pinValue = 0;
 	});
-	requestData(COMMAND_DIGITAL_READ, pinCode);
+	requestData(static_cast<uint8_t>(COMMAND_DIGITAL_READ), pinCode);
 	return (pinValue != 0);
 }
 
-void ControlBoard::digitalWrite(TopMicrocontrollerPin pin, bool value) {
-	// TODO: set pinMode
+void ControlBoard::digitalWrite(TopMicrocontrollerPin pin, uint8_t value) {
 	/*Arduino*/::digitalWrite(pin, value);
 }
 
-void ControlBoard::digitalWrite(BottomMicrocontrollerPin pin, bool value) {
-	// TODO: is pinMode set?
-	sendData(COMMAND_DIGITAL_WRITE, pin, value);
+void ControlBoard::digitalWrite(BottomMicrocontrollerPin pin, uint8_t value) {
+	sendData(
+		static_cast<uint8_t>(COMMAND_DIGITAL_WRITE),
+		static_cast<uint8_t>(pin), value
+	);
 }
 
 int ControlBoard::analogRead(TopMicrocontrollerPin pin) {
-	// TODO: set pinMode
 	return /*Arduino*/::analogRead(pin);
 }
 
 int ControlBoard::analogRead(TopMultiplexerPin pin) {
 	int channel = pin - T_TK0;
-	// TODO: set pinMode
-	_multiplexer.pinMode(MUX_IN, INPUT);
 	return _multiplexer.analogRead(channel);
 }
 
 int ControlBoard::analogRead(BottomMicrocontrollerPin pin) {
-	// TODO: is pinMode set?
-	static uint8_t pinCode = pin;
+	static uint8_t pinCode;
 	static int pinValue;
-	pinCode = pin;
+	pinCode = static_cast<uint8_t>(pin);
 	TwoWayIntegerEasyTransfer.attach(
 		[](uint8_t command, IntegerEasyTransfer & request) {
 		if ((command == COMMAND_ANALOG_READ_RE) &&
@@ -158,12 +166,11 @@ int ControlBoard::analogRead(BottomMicrocontrollerPin pin) {
 		else
 			pinValue = 0;
 	});
-	requestData(COMMAND_ANALOG_READ, pinCode);
+	requestData(static_cast<uint8_t>(COMMAND_ANALOG_READ), pinCode);
 	return pinValue;
 }
 
 void ControlBoard::analogWrite(TopMicrocontrollerPin pin, uint8_t value) {
-	// TODO: set pinMode
 	if (pin == T_TKD4)
 		/*Arduino*/::analogWrite(pin, value);
 }
@@ -182,7 +189,7 @@ uint8_t ControlBoard::updateIR(uint16_t * ir, uint8_t size) {
 				irValues[i] = 0;
 		}
 	});
-	requestData(COMMAND_READ_IR);
+	requestData(static_cast<uint8_t>(COMMAND_READ_IR));
 	memcpy(ir, irValues, maxItems * sizeof(uint16_t));
 	return maxItems;
 }
@@ -196,7 +203,7 @@ int LottieLemon::ControlBoard::trimRead() {
 		else
 			trimmerValue = 0;
 	});
-	requestData(COMMAND_READ_TRIM);
+	requestData(static_cast<uint8_t>(COMMAND_READ_TRIM));
 	return trimmerValue;
 }
 

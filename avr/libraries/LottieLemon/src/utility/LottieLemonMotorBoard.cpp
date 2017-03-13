@@ -105,8 +105,8 @@ bool MotorBoard::handleMessage(uint8_t command, IntegerEasyTransfer & request) {
 		break;
 	case COMMAND_PIN_MODE:
 		codename = request.readByte();
-		value = request.readInt();
-		_pinMode(codename, value);
+		modeName = request.readByte();
+		_pinMode(codename, modeName);
 	case COMMAND_ANALOG_WRITE:
 		codename = request.readByte();
 		value = request.readInt();
@@ -247,12 +247,12 @@ void MotorBoard::motorsStop() {
  *
  *
  */
-void MotorBoard::_pinMode(uint8_t codename, int value) {
+void MotorBoard::_pinMode(uint8_t codename, uint8_t value) {
 	uint8_t pin = parseCodename(codename);
 	if (pin == 0) { return; } // Not valid codename.
 	pinMode(pin, value);
 }
-void MotorBoard::_digitalWrite(uint8_t codename, bool value) {
+void MotorBoard::_digitalWrite(uint8_t codename, uint8_t value) {
 	uint8_t pin = parseCodename(codename);
 	if (pin == 0) { return; } // Not valid codename.
 	digitalWrite(pin, value);

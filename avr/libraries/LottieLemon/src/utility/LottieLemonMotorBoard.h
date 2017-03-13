@@ -59,9 +59,9 @@ namespace LottieLemon {
 		void stopCurrentActions();
 		//void sendCommand(byte command,byte codename,int value);
 
-		void _pinMode(uint8_t codename, int value);
+		void _pinMode(uint8_t codename, uint8_t value);
 		void _analogWrite(uint8_t codename, int value);
-		void _digitalWrite(uint8_t codename, bool value);
+		void _digitalWrite(uint8_t codename, uint8_t value);
 		void _analogRead(uint8_t codename);
 		void _digitalRead(uint8_t codename);
 		int _IRread(uint8_t num);

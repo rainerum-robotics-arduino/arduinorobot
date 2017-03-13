@@ -41,11 +41,13 @@ namespace LottieLemon {
 		void motorsWrite(int speedLeft, int speedRight);
 		void motorsStop(void);
 
+		void pinMode(TopMicrocontrollerPin pin, uint8_t value);
+		void pinMode(BottomMicrocontrollerPin pin, uint8_t value);
 		bool digitalRead(TopMicrocontrollerPin pin);
 		bool digitalRead(TopMultiplexerPin pin);
 		bool digitalRead(BottomMicrocontrollerPin pin);
-		void digitalWrite(TopMicrocontrollerPin pin, bool value);
-		void digitalWrite(BottomMicrocontrollerPin pin, bool value);
+		void digitalWrite(TopMicrocontrollerPin pin, uint8_t value);
+		void digitalWrite(BottomMicrocontrollerPin pin, uint8_t value);
 		int analogRead(TopMicrocontrollerPin pin);
 		int analogRead(TopMultiplexerPin pin);
 		int analogRead(BottomMicrocontrollerPin pin);
