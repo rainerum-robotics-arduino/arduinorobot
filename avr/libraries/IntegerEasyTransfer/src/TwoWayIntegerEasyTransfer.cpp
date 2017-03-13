@@ -45,8 +45,16 @@ void CTwoWayIntegerEasyTransfer::writeByte(uint8_t data) {
 	_response.writeByte(data);
 }
 
+void CTwoWayIntegerEasyTransfer::write(uint8_t data) {
+	writeByte(data);
+}
+
 void CTwoWayIntegerEasyTransfer::writeInt(int16_t data) {
 	_response.writeInt(data);
+}
+
+void CTwoWayIntegerEasyTransfer::write(int16_t data) {
+	writeInt(data);
 }
 
 bool CTwoWayIntegerEasyTransfer::hasReceivedData(void) {

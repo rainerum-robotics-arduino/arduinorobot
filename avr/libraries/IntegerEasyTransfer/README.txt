@@ -47,6 +47,8 @@
 *   1.1.0
 *        Added new classes to support two way communications and extended
 *        messages and software reset.
+*   1.1.1
+*        Added overloaded write method to TwoWayIntegerEasyTransfer.
 *
 *
 *  Limits of the Library

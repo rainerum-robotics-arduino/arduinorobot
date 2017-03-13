@@ -82,6 +82,15 @@ public:
 	void writeByte(uint8_t data);
 
 	/// <summary>
+	/// Adds a byte to the protocol buffer. See also:
+	/// <seealso cref="sendData" />
+	/// </summary>
+	/// <param name="data">
+	/// The byte to be inserted to the buffer.
+	/// </param>
+	void write(uint8_t data);
+
+	/// <summary>
 	/// Adds a integer to the protocol buffer. See also:
 	/// <seealso cref="sendData" />
 	/// </summary>
@@ -89,6 +98,15 @@ public:
 	/// The integer to be inserted to the buffer.
 	/// </param>
 	void writeInt(int16_t data);
+
+	/// <summary>
+	/// Adds a integer to the protocol buffer. See also:
+	/// <seealso cref="sendData" />
+	/// </summary>
+	/// <param name="data">
+	/// The integer to be inserted to the buffer.
+	/// </param>
+	void write(int16_t data);
 
 	/// <summary>Check wether messages have been received.</summary>
 	/// <returns>
