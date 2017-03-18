@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  IntegerEasyTransfer 1.1.0 library modified by Julian Sanin, sourced from:
+*  IntegerEasyTransfer 1.1.1 library modified by Julian Sanin, sourced from:
 *
 *  EasyTransfer Arduino Library v2.1
 *       details and example sketch: 
