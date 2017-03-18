@@ -29,7 +29,6 @@
 
 #include <ArduinoUnit.h>
 #include <IntegerEasyTransfer.h>
-#include <TwoWayIntegerEasyTransfer.h>
 
 void setup() {
 	Serial.begin(9600);
