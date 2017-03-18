@@ -49,6 +49,7 @@
 *        messages and software reset.
 *   1.1.1
 *        Added overloaded write method to TwoWayIntegerEasyTransfer.
+*        Initalized RX packet variables to zero. 
 *
 *
 *  Limits of the Library
