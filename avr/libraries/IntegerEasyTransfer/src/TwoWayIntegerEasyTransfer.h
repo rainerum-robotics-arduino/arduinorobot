@@ -50,7 +50,7 @@ public:
 		/// <summary>Extended message for a feature request.</summary>
 		MESSAGE_FEATURE          = 0xF0,
 		/// <summary>Extended message for software reset.</summary>
-		MESSAGE_SYSTEM_RESET     = 0xFF
+		MESSAGE_SYSTEM_RESET     = 0xF1
 	};
 
 	/// <summary>
